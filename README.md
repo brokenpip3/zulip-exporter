@@ -16,7 +16,7 @@
 |            `HPORT`           | Http port to listen on                                         |  `9863`   |    ❌    |
 |            `SLEEP`           | Time to wait in seconds beetween metric grabbing cycles        |  `120`    |    ❌    |
 
-### Docker compose example
+## Docker compose example
 
 ```
   zulip-exporter:
@@ -35,7 +35,7 @@
       - "9118"
 ```
 
-### Kubernetes
+## Kubernetes
 
 see [example](./kubernetes)
 
@@ -47,13 +47,15 @@ see [example](./kubernetes)
 
 - Streams info: `zulip_stream_*`
 
-### Prometheus rules examples
+## Prometheus rules examples
 
-see [rules examples](.kubernetes/zulip-rules.yaml)
+see [rules examples](./kubernetes/zulip-rules.yaml)
 
-### Grafana dashboard
+## Grafana dashboard
 
-see [example dashboard](.grafana/dashboard.json)
+![image](./grafana/example.png)
+
+see [example dashboard](./grafana/dashboard.json)
 
 ## Todo
 
@@ -61,6 +63,6 @@ see [example dashboard](.grafana/dashboard.json)
 
 ## Questions
 
-- Why you did this?
+**Q:** Why you did this?
 
-🤷‍♂️
+**A:** 🤷‍♂️
