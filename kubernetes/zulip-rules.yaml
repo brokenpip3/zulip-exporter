@@ -1,0 +1,36 @@
+apiVersion: monitoring.coreos.com/v1
+kind: PrometheusRule
+metadata:
+  name: zulip-rules
+spec:
+  groups:
+  - interval: 2m
+    name: zulip-users
+    rules:
+    - alert: zulip_new_admins
+      annotations:
+        description: Check if Zulip has new admins in the last 24 hours
+        summary: 'Zulip has {{ $value }} in the last 24 hours'
+      expr: changes(zulip_user_admin_total[24h])
+      for: 20m
+      labels:
+        severity: warning
+  - interval: 2m
+    name: zulip_streams
+    rules:
+    - alert: zulip_check_for_public_stream
+      annotations:
+        description: Check if there is new public stream in Zulip
+        summary: 'Zulip has {{ $value }} new public streams'
+      expr: zulip_stream_is_web_public > 0
+      for: 15m
+      labels:
+        severity: warning
+    - alert: zulip_muted_streams
+      annotations:
+        description: Check if Zulip has new muted streams in the last 24 hours
+        summary: 'Zulip has {{ $value }} new muted streams'
+      expr: changes(zulip_stream_is_muted[24h]) > 0
+      for: 15m
+      labels:
+        severity: warning

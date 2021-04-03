@@ -1,0 +1,67 @@
+---
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  labels:
+    app: zulip-exporter
+  name: zulip-exporter
+spec:
+  replicas: 1
+  selector:
+    matchLabels:
+      app: zulip-exporter
+  strategy:
+    type: Recreate
+  template:
+    metadata:
+      annotations:
+        prometheus.io/scrape: 'true'
+        prometheus.io/port: '9863'
+      labels:
+        app: zulip-exporter
+    spec:
+      containers:
+        - image: brokenpip3/zulip-exporter:0.01
+          name: zulip-exporter
+          env:
+          - name: ZULIP_EMAIL
+            valueFrom:
+              secretKeyRef:
+                name: zulip-exporter-secret
+                key: ZULIP_EMAIL
+          - name: ZULIP_API_KEY
+            valueFrom:
+              secretKeyRef:
+                name: zulip-exporter-secret
+                key: ZULIP_API_KEY
+          - name: ZULIP_SITE
+            valueFrom:
+              secretKeyRef:
+                name: zulip-exporter-secret
+                key: ZULIP_SITE
+                optional: true
+          ports:
+            - containerPort: 9863
+          resources:
+            requests:
+              memory: 50Mi
+              cpu: 50m
+            limits:
+              memory: 200Mi
+              cpu: 100m
+---
+kind: Service
+apiVersion: v1
+metadata:
+  name: zulip-exporter
+  labels:
+    app: zulip-exporter
+spec:
+  selector:
+    app: zulip-exporter
+  type: ClusterIP
+  ports:
+    - name: metrics
+      port: 9863
+      targetPort: 9863
+...
