@@ -23,8 +23,6 @@
     container_name: zulip-exporter
     restart: unless-stopped
     image: brokenpip3/zulip-exporter:0.01
-    expose:
-      - 9863
     labels:
       io.prometheus.scrape: true
       io.prometheus.port: 9863
@@ -32,7 +30,7 @@
     env_file:
       - .env-zulip
     ports:
-      - "9118"
+      - "9863"
 ```
 
 ## Kubernetes
