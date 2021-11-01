@@ -22,7 +22,7 @@
   zulip-exporter:
     container_name: zulip-exporter
     restart: unless-stopped
-    image: brokenpip3/zulip-exporter:0.01
+    image: quay.io/brokenpip3/zulip-exporter:0.0.1
     labels:
       io.prometheus.scrape: true
       io.prometheus.port: 9863

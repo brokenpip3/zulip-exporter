@@ -21,7 +21,7 @@ spec:
         app: zulip-exporter
     spec:
       containers:
-        - image: brokenpip3/zulip-exporter:0.01
+        - image: quay.io/brokenpip3/zulip-exporter:0.0.1
           name: zulip-exporter
           env:
           - name: ZULIP_EMAIL
