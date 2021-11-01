@@ -10,5 +10,5 @@ pycparser==2.20
 pyOpenSSL==20.0.1
 requests==2.25.1
 six==1.15.0
-urllib3==1.26.4
+urllib3==1.26.5
 zulip==0.7.1
